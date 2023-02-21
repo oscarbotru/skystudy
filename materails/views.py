@@ -2,7 +2,7 @@ from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated
 
 from materails.models import Course, Lesson
-from materails.permissions import ModeratorPermission
+from materails.permissions import ModeratorPermission, LessonPermission
 from materails.serlializers import CourseSerializer, LessonSerializer
 
 
@@ -21,6 +21,7 @@ class LessonCreateAPIView(generics.CreateAPIView):
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
+    permission_classes = [LessonPermission]
 
 
 class LessonListAPIVIew(generics.ListAPIView):
