@@ -1,4 +1,5 @@
 from rest_framework import viewsets, generics
+from rest_framework.permissions import IsAuthenticated
 
 from materails.models import Course, Lesson
 from materails.serlializers import CourseSerializer, LessonSerializer
