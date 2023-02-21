@@ -2,6 +2,7 @@ from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated
 
 from materails.models import Course, Lesson
+from materails.permissions import ModeratorPermission
 from materails.serlializers import CourseSerializer, LessonSerializer
 
 
@@ -9,6 +10,7 @@ from materails.serlializers import CourseSerializer, LessonSerializer
 class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
+    permission_classes = [ModeratorPermission]
 
 
 # Lessons
