@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from materails.models import Course, Lesson
+from materails.validators import LinkValidator
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -22,7 +23,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
 
 class LessonSerializer(serializers.ModelSerializer):
-    course = CourseSerializer()
+    # course = CourseSerializer()
     class Meta:
         model = Lesson
         fields = (
@@ -32,6 +33,7 @@ class LessonSerializer(serializers.ModelSerializer):
             'description',
             'video_link'
         )
+        validators = [LinkValidator(field='title')]
 
 
 class LessonInfoSerializer(serializers.ModelSerializer):

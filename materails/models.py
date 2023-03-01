@@ -25,7 +25,7 @@ class Lesson(models.Model):
     description = models.TextField(verbose_name='описание')
     video_link = models.CharField(max_length=255, verbose_name='видео')
 
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, **NULLABLE)
 
     def __str__(self):
         return f'{self.title} ({self.course.title})'
