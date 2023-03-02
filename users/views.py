@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -6,7 +7,7 @@ from rest_framework.views import APIView
 from materails.models import Course
 from users.models import User, Subscription
 from users.permissions import OwnProfileEditPermission
-from users.serializers import UserSerializer, UserProfileInfoSerializer
+from users.serializers import UserSerializer, UserProfileInfoSerializer, SubscriptionSerializer
 
 
 class UserUpdateAPIView(generics.UpdateAPIView):
@@ -22,6 +23,7 @@ class UserRetrieveAPIView(generics.RetrieveAPIView):
 
 class SubscriptionToggleAPIView(APIView):
 
+    @swagger_auto_schema(responses={200: SubscriptionSerializer(many=True)})
     def post(self, *args, **kwargs):
         user = self.request.user
         course_id = self.request.data.get('course')

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from users.models import User, Payment
+from users.models import User, Payment, Subscription
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -41,4 +41,13 @@ class UserProfileInfoSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'payments'
+        )
+
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Subscription
+        fields = (
+            'course',
         )
