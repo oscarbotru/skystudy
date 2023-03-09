@@ -38,6 +38,9 @@ class Payment(models.Model):
     pay_type = models.CharField(choices=PAY_TYPES, default=PAY_TYPE_CASH, max_length=10,
                                 verbose_name='способ оплаты')
 
+    payment_id = models.CharField(max_length=25, **NULLABLE)
+    payment_url = models.CharField(max_length=100, **NULLABLE)
+
     def __str__(self):
         return f'{self.user} - {self.amount}'
 

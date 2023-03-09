@@ -142,3 +142,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ]
 }
+
+TINKOFF_TERMINAL_KEY = '1677659270153DEMO'
+TINKOFF_TERMINAL_PASSWORD = '9rgoqv88ygs8g7ed'
+TINKOFF_URL = 'https://securepay.tinkoff.ru/v2/'

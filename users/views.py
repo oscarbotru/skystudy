@@ -8,6 +8,7 @@ from materails.models import Course
 from users.models import User, Subscription
 from users.permissions import OwnProfileEditPermission
 from users.serializers import UserSerializer, UserProfileInfoSerializer, SubscriptionSerializer
+from users.services import get_payment_link
 
 
 class UserUpdateAPIView(generics.UpdateAPIView):
@@ -25,18 +26,14 @@ class SubscriptionToggleAPIView(APIView):
 
     @swagger_auto_schema(responses={200: SubscriptionSerializer(many=True)})
     def post(self, *args, **kwargs):
-        user = self.request.user
         course_id = self.request.data.get('course')
         course_item = get_object_or_404(Course, pk=course_id)
 
-        subs_item = Subscription.objects.filter(user=user, course=course_item)
-
-        if subs_item.exists():
-            subs_item.delete()
-            message = 'подписка удалена'
-
-        else:
-            Subscription.objects.create(user=user, course=course_item)
-            message = 'подписка добавлена'
-
-        return Response({"message": message})
+        payment_link = get_payment_link(self.request.user, course_item)
+        if payment_link:
+            return Response({
+                'message': payment_link
+            })
+        return Response({
+            'message': 'Что-то пошло не так'
+        })
