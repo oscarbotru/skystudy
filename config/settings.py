@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'django_celery_beat',
 
     'materails',
     'users',
@@ -146,3 +147,5 @@ REST_FRAMEWORK = {
 TINKOFF_TERMINAL_KEY = '1677659270153DEMO'
 TINKOFF_TERMINAL_PASSWORD = '9rgoqv88ygs8g7ed'
 TINKOFF_URL = 'https://securepay.tinkoff.ru/v2/'
+
+CELERY_BROKER_URL = 'redis://localhost:6379/3'

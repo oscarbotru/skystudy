@@ -25,8 +25,21 @@ class Payment(models.Model):
         (PAY_TYPE_CARD, 'перевод на счет')
     )
 
+    STATUS_NEW = 'new'
+    STATUS_HANDLE = 'handle'
+    STATUS_DONE = 'done'
+    STATUS_CANCELED = 'canceled'
+
+    STATUSES = (
+        (STATUS_NEW, 'new'),
+        (STATUS_HANDLE, 'handle'),
+        (STATUS_DONE, 'done'),
+        (STATUS_CANCELED, 'canceled'),
+    )
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='пользователь',
                              on_delete=models.CASCADE)
+    status = models.CharField(choices=STATUSES, max_length=15, default=STATUS_NEW)
     datetime = models.DateTimeField(verbose_name='дата оплаты', **NULLABLE)
 
     lesson = models.ForeignKey('materails.Lesson', on_delete=models.CASCADE,
